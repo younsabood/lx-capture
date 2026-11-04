@@ -1,0 +1,17 @@
+flowchart TB
+    Payload["One rectangle in the raw payload"] --> Command["command · 1 byte · 0"]
+    Payload --> X["x · u32 little-endian"]
+    Payload --> Y["y · u32 little-endian"]
+    Payload --> Width["width · u32 little-endian"]
+    Payload --> Height["height · u32 little-endian"]
+    Payload --> Length["pixel length · u32 little-endian"]
+    Payload --> Pixels["packed pixel rows · 2 or 3 bytes per pixel"]
+    Pixels --> High["High Color · RGB555 little-endian"]
+    Pixels --> True["True Color · BGR24"]
+
+    classDef header fill:#10233f,stroke:#36c7ee,color:#eaf8ff,stroke-width:2px
+    classDef bytes fill:#24134a,stroke:#9b7cff,color:#f5f0ff,stroke-width:2px
+    classDef color fill:#12351f,stroke:#38d996,color:#edfff5,stroke-width:2px
+    class Payload,Command,X,Y,Width,Height,Length header
+    class Pixels bytes
+    class High,True color

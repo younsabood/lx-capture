@@ -1,0 +1,19 @@
+flowchart LR
+    Desktop["Windows desktop output"] --> DXGI["DXGI Desktop Duplication"]
+    DXGI --> Meta["Move + dirty rectangles"]
+    Meta --> Tiles["32×32 tile selection"]
+    DXGI --> Staging["D3D11 staging texture"]
+    Tiles --> Readback["Read dirty tiles"]
+    Staging --> Readback
+    Readback --> Compare["Compare with emitted baseline"]
+    Compare --> Merge["Merge adjacent changed regions"]
+    Merge --> Stream["Command-0 rectangle stream"]
+    Stream --> Compress["Keep zlib only when smaller"]
+    Compress --> Caller["Caller-owned frame bytes"]
+
+    classDef source fill:#10233f,stroke:#36c7ee,color:#eaf8ff,stroke-width:2px
+    classDef process fill:#24134a,stroke:#9b7cff,color:#f5f0ff,stroke-width:2px
+    classDef output fill:#12351f,stroke:#38d996,color:#edfff5,stroke-width:2px
+    class Desktop,DXGI,Staging source
+    class Meta,Tiles,Readback,Compare,Merge,Stream,Compress process
+    class Caller output

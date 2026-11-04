@@ -1,0 +1,52 @@
+[package]
+name = "lx-capture"
+version = "0.1.0"
+edition = "2021"
+description = "Windows DXGI desktop capture with dirty-tile updates and compact rectangle frames"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/younsabood/lx-capture"
+documentation = "https://docs.rs/lx-capture"
+readme = "README.md"
+keywords = ["screen-capture", "dxgi", "desktop", "windows", "tiles"]
+categories = ["multimedia::video", "os::windows-apis", "api-bindings"]
+include = [
+    "Cargo.toml",
+    "README.md",
+    "LICENSE-MIT",
+    "LICENSE-APACHE",
+    "SECURITY.md",
+    "CONTRIBUTING.md",
+    "CODE_OF_CONDUCT.md",
+    "CHANGELOG.md",
+    "THIRD-PARTY-NOTICES.md",
+    "src/**/*.rs",
+    "examples/**/*.rs",
+    "docs/**/*.md",
+    "docs/**/*.mmd",
+    "docs/**/*.png",
+    "docs/**/*.svg",
+]
+
+[lib]
+name = "lx_capture"
+path = "src/lib.rs"
+crate-type = ["rlib"]
+
+[dependencies]
+crc32fast = "1"
+flate2 = { version = "1", default-features = false, features = ["zlib"] }
+
+[target.'cfg(windows)'.dependencies]
+windows = { version = "0.62", features = [
+    "Win32_Foundation",
+    "Win32_Graphics_Direct3D",
+    "Win32_Graphics_Direct3D11",
+    "Win32_Graphics_Dxgi",
+    "Win32_Graphics_Dxgi_Common",
+    "Win32_UI_WindowsAndMessaging",
+    # DXGI_OUTPUT_DESC uses HMONITOR; capture itself is DXGI-only.
+    "Win32_Graphics_Gdi",
+] }
+
+[package.metadata.docs.rs]
+targets = ["x86_64-pc-windows-msvc"]

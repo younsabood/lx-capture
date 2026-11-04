@@ -1,0 +1,10 @@
+/target/
+/dist/
+*.lrec
+*.mp4
+*.avi
+*.pdb
+*.dll
+*.lib
+*.exp
+/capture-*.png
