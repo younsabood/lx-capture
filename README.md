@@ -30,7 +30,7 @@ The library returns image bytes to the caller. It does not provide a UI, write a
 | Updates | Initial full-screen keyframe, then changed rectangles; unchanged frames return `None` |
 | High Color | RGB555 packed into a little-endian 16-bit word |
 | True Color | BGR24 packed as three bytes per pixel |
-| Compression | Zlib level 9 when the result is smaller; otherwise raw bytes |
+| Compression | Zlib level 9 through the pure-Rust `zlib-rs` backend when smaller; otherwise raw bytes |
 | Scope | One desktop output selected by the library; no UI or file/network I/O |
 
 ## Capture path

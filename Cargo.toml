@@ -1,6 +1,6 @@
 [package]
 name = "lx-capture"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 description = "Windows DXGI desktop capture with dirty-tile updates and compact rectangle frames"
 license = "MIT OR Apache-2.0"
@@ -34,7 +34,7 @@ crate-type = ["rlib"]
 
 [dependencies]
 crc32fast = "1"
-flate2 = { version = "1", default-features = false, features = ["zlib"] }
+flate2 = { version = "1", default-features = false, features = ["zlib-rs"] }
 
 [target.'cfg(windows)'.dependencies]
 windows = { version = "0.62", features = [
